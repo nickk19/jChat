@@ -24,9 +24,9 @@ class ServerRunnable implements Runnable {
 					System.out.println(client.getInetAddress().getCanonicalHostName() + " says: " + strRicevuta);
 					
 					for (Socket sk: MultiServer.connections) {
+						DataOutputStream out = new DataOutputStream(sk.getOutputStream());
 						System.out.println("Sending " + strRicevuta + " to " + sk.getInetAddress().getCanonicalHostName());
-						outStream = (DataOutputStream) sk.getOutputStream();
-						outStream.writeBytes(sk.getInetAddress().getCanonicalHostName() + " says: " + strRicevuta + "\n");
+						out.writeBytes(sk.getInetAddress().getCanonicalHostName() + " says: " + strRicevuta + "\n");
 					}
 				}
 			}
@@ -35,6 +35,7 @@ class ServerRunnable implements Runnable {
 			inStream.close();
 			System.out.println(client.getInetAddress().getCanonicalHostName() + " disconnected");
 			MultiServer.connections.remove(client);
+			System.out.println("Connections number: " + MultiServer.connections.size() + "\n");
 			client.close();
 		} catch (Exception e) {
 			e.printStackTrace(System.out);
