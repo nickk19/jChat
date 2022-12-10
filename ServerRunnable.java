@@ -25,6 +25,7 @@ class ServerRunnable implements Runnable {
 					
 					for (Socket sk: MultiServer.connections) {
 						System.out.println("Sending " + strRicevuta + " to " + sk.getInetAddress().getCanonicalHostName());
+						outStream = (DataOutputStream) sk.getOutputStream();
 						outStream.writeBytes(sk.getInetAddress().getCanonicalHostName() + " says: " + strRicevuta + "\n");
 					}
 				}

@@ -34,7 +34,6 @@ public class MultiClient {
 	public void send() {
 		while (mySocket.isConnected()) {
 			try {
-				System.out.print(mySocket.getInetAddress().getCanonicalHostName() + ": ");
 				String strUtente = bufferedReader.readLine();
 				outStream.writeBytes(strUtente + "\n");
 				outStream.flush();
@@ -51,6 +50,7 @@ public class MultiClient {
 	}
 
 	public void listen() {
+		System.out.print(mySocket.getInetAddress().getCanonicalHostName() + ": ");
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
