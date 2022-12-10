@@ -58,7 +58,8 @@ public class MultiClient {
 					String strRicevuta;
 					try {
 						strRicevuta = inStream.readLine();
-						System.out.println("\n" + strRicevuta);
+						System.out.println(strRicevuta);
+						System.out.print(mySocket.getInetAddress().getCanonicalHostName() + ": ");
 					} catch (IOException e) {}
 				}
 			}
